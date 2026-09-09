@@ -14,7 +14,7 @@ function flazz_git_prompt_info() {
 }
 
 PROMPT='$(flazz_git_prompt_info)
-%{${fg[green]}%}%3~ %{$reset_color%}%{${fg_bold[$CARETCOLOR]}%}%#%{${reset_color}%} '
+%(?..%F{9}⚠️ %?%f )%D{%H:%M:%S} %{${fg[green]}%}%3~ %{$reset_color%}%{${fg_bold[$CARETCOLOR]}%}%#%{${reset_color}%} '
 
 RPS1='$(vi_mode_prompt_info) ${return_code}'
 
