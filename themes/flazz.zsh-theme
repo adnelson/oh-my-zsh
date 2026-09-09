@@ -13,8 +13,18 @@ function flazz_git_prompt_info() {
   print -r -- "$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
 
-PROMPT='$(flazz_git_prompt_info)
-%(?..%F{9}⚠️ %?%f )%D{%H:%M:%S} %{${fg[green]}%}%3~ %{$reset_color%}%{${fg_bold[$CARETCOLOR]}%}%#%{${reset_color}%} '
+function flazz_prompt_header() {
+  local git_info=$(flazz_git_prompt_info)
+  local profile=${AWS_PROFILE:-}
+  if (( $+functions[aws_prompt_profile] )); then
+    profile=$(aws_prompt_profile)
+  fi
+  [[ -n $git_info || -n $profile ]] || return 0
+  # The empty prompt escape preserves the newline in command substitution.
+  print -rn -- "$git_info"$'\n%{%}'
+}
+
+PROMPT='$(flazz_prompt_header)%(?..%F{9}⚠️ %?%f )%D{%H:%M:%S} %{${fg[green]}%}%3~ %{$reset_color%}%{${fg_bold[$CARETCOLOR]}%}%#%{${reset_color}%} '
 
 RPS1='$(vi_mode_prompt_info) ${return_code}'
 
