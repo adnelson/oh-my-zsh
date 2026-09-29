@@ -24,7 +24,7 @@ function flazz_prompt_header() {
   print -rn -- "$git_info"$'\n%{%}'
 }
 
-PROMPT='$(flazz_prompt_header)%(?..%F{9}⚠️ %?%f )%D{%H:%M:%S} %{${fg[green]}%}%3~ %{$reset_color%}%{${fg_bold[$CARETCOLOR]}%}%#%{${reset_color}%} '
+PROMPT='$(flazz_prompt_header)%(?..%F{9}%{⚠️%2G%} %?%f )%D{%H:%M:%S} %{${fg[green]}%}%3~ %{$reset_color%}%{${fg_bold[$CARETCOLOR]}%}%#%{${reset_color}%} '
 
 RPS1='$(vi_mode_prompt_info) ${return_code}'
 
